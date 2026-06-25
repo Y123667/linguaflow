@@ -11,12 +11,89 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body, #root { height: 100%; }
       .safe-area-pb { padding-bottom: env(safe-area-inset-bottom, 0); }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+      }
+      #app-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.3s ease;
+      }
+      .loader-logo {
+        font-size: 64px;
+        margin-bottom: 16px;
+        animation: bounce 1.5s infinite;
+      }
+      .loader-text {
+        font-size: 24px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 8px;
+      }
+      .loader-sub {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+      .loader-spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid #e0e7ff;
+        border-top-color: #6366F1;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      .loader-error {
+        color: #ef4444;
+        font-size: 13px;
+        margin-top: 16px;
+        text-align: center;
+        max-width: 300px;
+        padding: 0 20px;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
     </style>
-    <script type="module" crossorigin src="/linguaflow/assets/index-dSqoMGuE.js"></script>
-    <link rel="stylesheet" crossorigin href="/linguaflow/assets/index-Yx9Banei.css">
+    <script type="module" crossorigin src="/linguaflow/assets/index-iKBJOczd.js"></script>
+    <link rel="modulepreload" crossorigin href="/linguaflow/assets/react-vendor-DsOrtjD5.js">
+    <link rel="modulepreload" crossorigin href="/linguaflow/assets/framer-motion-BP7Z4sAH.js">
+    <link rel="modulepreload" crossorigin href="/linguaflow/assets/charts-C_4SK0y8.js">
+    <link rel="modulepreload" crossorigin href="/linguaflow/assets/icons-DdmE5F8h.js">
+    <link rel="stylesheet" crossorigin href="/linguaflow/assets/index-CUn8g-f7.css">
   </head>
   <body>
+    <div id="app-loader">
+      <div class="loader-logo">🌍</div>
+      <div class="loader-text">LinguaFlow</div>
+      <div class="loader-sub">正在加载学习内容...</div>
+      <div class="loader-spinner"></div>
+      <div id="loader-error" class="loader-error" style="display:none;"></div>
+    </div>
     <div id="root"></div>
+    <script>
+      // 监听 JS 加载错误
+      window.addEventListener('error', function(e) {
+        var errEl = document.getElementById('loader-error');
+        if (errEl) {
+          errEl.style.display = 'block';
+          errEl.textContent = '加载出错: ' + (e.message || '未知错误') + '。请刷新页面重试。';
+        }
+      });
+    </script>
   
           <script>
             (function() {
